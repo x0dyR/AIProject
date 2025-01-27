@@ -1,0 +1,16 @@
+{
+  "name": "aiproject",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "electron": "^34.0.1",
+    "electronmon": "^2.0.3"
+  }
+}
