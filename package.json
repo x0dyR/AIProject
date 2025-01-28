@@ -10,7 +10,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "dotenv": "^16.4.7",
     "electron": "^34.0.1",
-    "electronmon": "^2.0.3"
+    "electronmon": "^2.0.3",
+    "http-server": "^14.1.1",
+    "openai": "^4.80.1"
   }
 }

@@ -35,12 +35,8 @@
         <div class="search">
             <h3>Поиск</h3>
             <input name="BookText" class="BookRequestText" type="text" required minlength="5" maxlength="200" />
-            <script> function asd() {
-                    console.log(BookText.value);
-                }
-            </script>
-
-            <button onclick="asd()">asd</button>
+            <button type="button" onclick="RequestBookText()" class="SendRequest">Try it</button>
+            <script type="module" src="../src/Scripts/RequestBook.js"></script>
         </div>
 
         <div class="book-storage">
