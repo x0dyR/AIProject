@@ -5,7 +5,11 @@ function createMainWindow() {
     const mainWindow = new BrowserWindow({
         title: `Seriy gey`,
         width: 1920,
-        height: 720
+        height: 720,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+        }
     });
 
     mainWindow.loadFile(path.join(__dirname, "index.html"))
