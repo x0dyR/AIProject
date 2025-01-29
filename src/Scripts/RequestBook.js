@@ -1,47 +1,30 @@
-const { } = require(`dotenv`).config();
-const { OpenAI } = require(`openai`)
+import "dotenv/config"
+import { Ollama } from "ollama-node";
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_KEY,
-    dangerouslyAllowBrowser:true,
-});
+const ollama = new Ollama();
+await ollama.setModel("llama2");
 
-const completion = openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    store: true,
-    messages: [
-        { "role": "user", "content": "write a haiku about ai" },
-    ],
-});
-
-completion.then((result) => console.log(result.choices[0].message));
+// callback to print each word 
+const print = (word) => {
+    process.stdout.write(word);
+}
+await ollama.streamingGenerate("why is the sky blue", print);
 // const { OpenAI } = require(`openai`)
 
-// const openai = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+// const openai = new OpenAI({
+//     apiKey: process.env.OPENAI_KEY,
+//     dangerouslyAllowBrowser:true,
+// });
 
-// function SendRequest() {
-//     document.getElementsByClassName(`SendRequest`)[0].addEventListener(`click`, async () => {
-//         try {
-//             await TestRequest();
+// const completion = openai.chat.completions.create({
+//     model: "gpt-3.5-turbo",
+//     store: true,
+//     messages: [
+//         { "role": "user", "content": "write a haiku about ai" },
+//     ],
+// });
 
-//         } catch (error) {
-//             console.log(error)
-//         }
-//     })
-// }
-
-// async function TestRequest() {
-//     const stream = await openai.chat.completions.create({
-//         model: `chatgpt-4o-latest`,
-//         messages: [{ role: `user`, content: `Say this is test` }],
-//         store: true,
-//         stream: true,
-//     });
-
-//     for await (const chunk of stream) {
-//         process.stdout.write(chunk.choices[0]?.delta?.content || ``);
-//     }
-// }
+// completion.then((result) => console.log(result.choices[0].message));
 
 function RequestBookText() {
     var inputValue = document.getElementsByClassName("BookRequestText")[0];
