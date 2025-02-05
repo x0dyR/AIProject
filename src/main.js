@@ -5,7 +5,7 @@ function createMainWindow() {
     const mainWindow = new BrowserWindow({
         title: `Seriy gey`,
         width: 1920,
-        height: 720,
+        height: 1080,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
