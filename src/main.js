@@ -1,5 +1,8 @@
+const { } = require(`dotenv/config`)
 const path = require(`path`)
 const { app, BrowserWindow, Menu } = require(`electron`)
+const { fetchBookData } = require('./Scripts/bookService');
+
 
 function createMainWindow() {
     const mainWindow = new BrowserWindow({
