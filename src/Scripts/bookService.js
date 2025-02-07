@@ -12,6 +12,8 @@ async function fetchBookData(keyword) {
         const coverId = book.cover_i;
         const coverUrl = coverId ? `https://covers.openlibrary.org/b/id/${coverId}-L.jpg` : '';
 
+        console.log(url);
+     
         return {
             title: book.title || 'Нет названия',
             author: book.author_name ? book.author_name.join(', ') : 'Неизвестен',

@@ -1,23 +1,59 @@
 // renderer.js
 const { Ollama } = require('ollama');
-const { fetchBookData } = require('./Scripts/bookService.js');
+const { fetchBookData } = require('./Scripts/bookService');
 
-// Пример использования:
+const ollama = new Ollama();
+
+/**
+ * Функция, которая по пожеланиям пользователя генерирует ключевые слова для поиска книги.
+ * Система должна вернуть строку с одним или двумя ключевыми словами, разделёнными запятой.
+ */
+async function generateKeywords(wishes) {
+    const response = await ollama.chat({
+        model: "mistral", // или другой модельный идентификатор, если требуется
+        messages: [
+            { 
+                role: "system", 
+                content: "Ты помощник, который извлекает ключевые слова для поиска книги. " +
+                         "Отвечай только на русском языке. Из полученных пожеланий выбери одно или два наиболее релевантных ключевых слова, разделённые запятой, без дополнительных пояснений." 
+            },
+            { role: "user", content: wishes }
+        ]
+    });
+    // Предполагаем, что ответ выглядит примерно так: "роман, мистика"
+    return response.message.content;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const button = document.querySelector('.SendRequest');
     const responseElement = document.querySelector('.responseText');
+    const input = document.querySelector('.BookRequestText');
 
     button.addEventListener('click', async () => {
-        const keyword = document.querySelector('.BookRequestText').value.trim();
-        if (!keyword) {
-            responseElement.innerText = 'Введите ключевое слово для поиска книги.';
+        const wishes = input.value.trim();
+        if (!wishes) {
+            responseElement.innerText = 'Пожалуйста, введите свои пожелания.';
             return;
         }
-        responseElement.innerHTML = 'Загрузка...';
+
+        //responseElement.innerHTML = 'Генерация ключевых слов...';
+
         try {
-            const bookData = await fetchBookData(keyword);
-            // Вывод данных на страницу:
-            responseElement.innerHTML = `
+            // Генерируем ключевые слова из пожеланий пользователя
+            const keywordsText = await generateKeywords(wishes);
+            // Разбиваем по запятой и убираем лишние пробелы
+            const keywords = keywordsText.split(',').map(k => k.trim()).filter(Boolean);
+
+            // Для простоты возьмём первый ключевой запрос
+            const searchQuery = keywords[0];
+
+            //responseElement.innerHTML = `Ключевые слова: ${keywords.join(', ')}<br>Поиск книги по запросу: "${searchQuery}"...`;
+
+            // Запрашиваем данные книги из онлайн-библиотеки по сгенерированному ключевому слову
+            const bookData = await fetchBookData(searchQuery);
+
+            // Формируем HTML для отображения данных книги
+            const bookInfoHTML = `
                 <h2>${bookData.title}</h2>
                 <p><strong>Автор:</strong> ${bookData.author}</p>
                 <p><strong>Год издания:</strong> ${bookData.publishYear}</p>
@@ -25,34 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${bookData.subjects.length > 0 ? `<p><strong>Темы:</strong> ${bookData.subjects.join(', ')}</p>` : ''}
                 <p><strong>Описание:</strong> ${bookData.description}</p>
             `;
+
+            responseElement.innerHTML += `<hr>${bookInfoHTML}`;
         } catch (error) {
             console.error("Ошибка:", error);
             responseElement.innerText = "Произошла ошибка: " + error.message;
         }
     });
 });
-
-
-// Функция для получения текста из поля ввода
-function bookText() {
-    const inputElement = document.querySelector(".BookRequestText");
-    return inputElement.value;
-}
-
-// Функция для вызова Ollama (рекомендации)
-async function RequestBookText() {
-    const response = await ollama.chat({
-        model: "mistral",
-        messages: [
-            { 
-                role: "system", 
-                content: "Отвечай только и исключительно на русском языке. " +
-                         "Ты помощник, который рекомендует книги. " +
-                         "Если пользователь вводит ключевое слово, выбери книгу, " +
-                         "в которой упоминается это слово в названии или описании."
-            },
-            { role: "user", content: bookText() },
-        ],
-    });
-    return response;
-}
