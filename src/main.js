@@ -1,12 +1,16 @@
-const { } = require(`dotenv/config`)
-const path = require(`path`)
-const { app, BrowserWindow, Menu } = require(`electron`)
+const { app, BrowserWindow, Menu } = require('electron');
+const path = require('path');
+require('dotenv/config'); // Loads environment variables from .env file
 const { fetchBookData } = require('./Scripts/bookService');
+const MongoClient = require('mongodb').MongoClient;
 
+const password = encodeURIComponent(process.env.MONGO_PASSWD);
+const uri = `mongodb+srv://xody:${password}@aiproject.ncjxz.mongodb.net/?retryWrites=true&w=majority&appName=AIProject`;
+const client = new MongoClient(uri);
 
 function createMainWindow() {
     const mainWindow = new BrowserWindow({
-        title: `Seriy gey`,
+        title: 'Seriy gey',
         width: 1920,
         height: 1080,
         webPreferences: {
@@ -14,30 +18,42 @@ function createMainWindow() {
             contextIsolation: false,
         }
     });
-
-    mainWindow.loadFile(path.join(__dirname, "index.html"))
+    mainWindow.loadFile(path.join(__dirname, 'index.html'));
 }
 
-app.whenReady().then(() => {
-    createMainWindow();
-
-    const mainMenu = Menu.buildFromTemplate(menu);
-    Menu.setApplicationMenu(mainMenu);
-
-    app.on(`activate`, () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createMainWindow();
-        }
-    });
-});
-
 const menu = [{
-    label: `File`,
+    label: 'File',
     submenu: [
         {
-            lable: `Quit`,
-            click: () => app.quit(),
-            accelerator: `CmdOrCtrl+W`
+            label: 'Quit',
+            click: () => {
+                client.close(); // close the client before quitting
+                app.quit();
+            },
+            accelerator: 'CmdOrCtrl+W'
         }
     ]
 }];
+
+app.whenReady().then(async () => {
+    try {
+        createMainWindow();
+
+        // Attempt to connect to MongoDB
+        await client.connect();
+        const db = client.db("AIProject");
+
+        const mainMenu = Menu.buildFromTemplate(menu);
+        Menu.setApplicationMenu(mainMenu);
+
+        app.on('activate', () => {
+            if (BrowserWindow.getAllWindows().length === 0) {
+                createMainWindow();
+            }
+        });
+    } catch (error) {
+        console.error('Error connecting to MongoDB:', error);
+        // Optionally, exit the app if the connection is critical:
+        app.quit();
+    }
+});
