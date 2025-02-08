@@ -1,6 +1,6 @@
 const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
-require('dotenv/config'); // Loads environment variables from .env file
+require('dotenv/config');
 const { fetchBookData } = require('./Scripts/bookService');
 const MongoClient = require('mongodb').MongoClient;
 
@@ -27,7 +27,7 @@ const menu = [{
         {
             label: 'Quit',
             click: () => {
-                client.close(); // close the client before quitting
+                client.close();
                 app.quit();
             },
             accelerator: 'CmdOrCtrl+W'
@@ -39,7 +39,6 @@ app.whenReady().then(async () => {
     try {
         createMainWindow();
 
-        // Attempt to connect to MongoDB
         await client.connect();
         const db = client.db("AIProject");
 
@@ -52,8 +51,8 @@ app.whenReady().then(async () => {
             }
         });
     } catch (error) {
-        console.error('Error connecting to MongoDB:', error);
-        // Optionally, exit the app if the connection is critical:
+        console.error(error);
         app.quit();
     }
 });
+//TODO: сделать onboarding(фильтр ввиде опросника пример(https://jobescape.me/chat-v5/quiz?i=1)), дизайн взять с фигмы.Сначала идет блок "популярные книги" затем "Помощь с выбором книг". 
