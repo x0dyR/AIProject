@@ -1,35 +1,4 @@
-* {
-    padding: 0;
-    margin: 0;
-}
 
-body {
-    background-color: #222;
-}
-
-h1 {
-    color: #999011;
-}
-
-.header-navigation ul li {
-    display: inline-block;
-    width: 200px;
-
-}
-
-li:first-child {
-    margin-right: 60%;
-}
-
-.header-navigation ul a {
-    color: white;
-    text-decoration: none;
-}
-
-.header-navigation {
-    height: 100px;
-    width: 100%;
-}
 
 .search {
     display: flex;

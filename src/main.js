@@ -8,8 +8,10 @@ const password = encodeURIComponent(process.env.MONGO_PASSWD);
 const uri = `mongodb+srv://xody:${password}@aiproject.ncjxz.mongodb.net/?retryWrites=true&w=majority&appName=AIProject`;
 const client = new MongoClient(uri);
 
+var mainWindow;
+
 function createMainWindow() {
-    const mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         title: 'Seriy gey',
         width: 1920,
         height: 1080,
@@ -19,6 +21,7 @@ function createMainWindow() {
         }
     });
     mainWindow.loadFile(path.join(__dirname, 'index.html'));
+    mainWindow.webContents.openDevTools();
 }
 
 const menu = [{
@@ -31,6 +34,19 @@ const menu = [{
                 app.quit();
             },
             accelerator: 'CmdOrCtrl+W'
+        }
+    ],
+    label: 'Dev',
+    submenu: [
+        {
+            label: 'Enable DevTools',
+            click: () => {
+                mainWindow.webContents.openDevTools();
+            },
+            accelerator: 'CmdOrCtrl+Shift+I',
+            label: 'asd',
+            accelerator: 'CmdOrCtrl+W',
+            
         }
     ]
 }];
