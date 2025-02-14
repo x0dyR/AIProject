@@ -13,6 +13,7 @@
     "@langchain/community": "^0.2.31",
     "@langchain/core": "^0.2.27",
     "@langchain/ollama": "^0.0.4",
+    "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "electron": "^34.0.1",
     "electronmon": "^2.0.3",

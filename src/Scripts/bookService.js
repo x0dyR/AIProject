@@ -1,31 +1,31 @@
-// Scripts/bookService.js
-async function fetchBookData(keyword) {
-    const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(keyword)}`;
-    const response = await fetch(url);
-    const data = await response.json();
+const axios = require('axios');
 
-    if (data.docs && data.docs.length > 0) {
-        // Выбираем первый результат
-        const book = data.docs[0];
+async function fetchBookData(query) {
+    try {
+        // Формируем URL для запроса. Если у вас есть API ключ, его можно добавить через &key=ВАШ_API_KEY
+        const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`;
+        const response = await axios.get(url);
+        
+        if (response.data.totalItems > 0) {
+            // Берём первую книгу из результатов
+            const book = response.data.items[0].volumeInfo;
 
-        // Получаем URL обложки (если есть)
-        const coverId = book.cover_i;
-        const coverUrl = coverId ? `https://covers.openlibrary.org/b/id/${coverId}-L.jpg` : '';
+            console.log(url)
 
-        console.log(url);
-     
-        return {
-            title: book.title || 'Нет названия',
-            author: book.author_name ? book.author_name.join(', ') : 'Неизвестен',
-            publishYear: book.first_publish_year || 'Неизвестен',
-            coverUrl,
-            subjects: book.subject ? book.subject.slice(0, 5) : [],
-            description: book.first_sentence || 'Описание недоступно'
-        };
-    } else {
-        throw new Error('Книга не найдена');
+            return {
+                title: book.title || 'Без названия',
+                author: book.authors ? book.authors.join(', ') : 'Неизвестный автор',
+                publishYear: book.publishedDate ? book.publishedDate.substring(0, 4) : 'Неизвестен',
+                coverUrl: book.imageLinks ? book.imageLinks.thumbnail : '',
+                subjects: book.categories || [],
+                description: book.description || 'Нет описания'
+            };
+        } else {
+            throw new Error('Книги не найдены');
+        }
+    } catch (error) {
+        throw new Error('Ошибка при получении данных книги: ' + error.message);
     }
 }
 
-// Экспортируем функцию через CommonJS:
 module.exports = { fetchBookData };
