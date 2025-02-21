@@ -1,14 +1,14 @@
 const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
 require('dotenv/config');
-const { fetchBookData } = require('./Scripts/bookService');
-const MongoClient = require('mongodb').MongoClient;
+const connectDB = require('./db'); // Наш модуль подключения к базе
+// Если потребуется, подключай и сервисы/модели:
+const User = require('./schemas/user');
+const Book = require('./schemas/book');
+const Author = require('./schemas/author')
+const Category = require('./schemas/categories')
 
-const password = encodeURIComponent(process.env.MONGO_PASSWD);
-const uri = `mongodb+srv://xody:${password}@aiproject.ncjxz.mongodb.net/?retryWrites=true&w=majority&appName=AIProject`;
-const client = new MongoClient(uri);
-
-var mainWindow;
+let mainWindow;
 
 function createMainWindow() {
     mainWindow = new BrowserWindow({
@@ -30,7 +30,6 @@ const menu = [{
         {
             label: 'Quit',
             click: () => {
-                client.close();
                 app.quit();
             },
             accelerator: 'CmdOrCtrl+W'
@@ -43,10 +42,7 @@ const menu = [{
             click: () => {
                 mainWindow.webContents.openDevTools();
             },
-            accelerator: 'CmdOrCtrl+Shift+I',
-            label: 'asd',
-            accelerator: 'CmdOrCtrl+W',
-            
+            accelerator: 'CmdOrCtrl+Shift+I'
         }
     ]
 }];
@@ -55,8 +51,8 @@ app.whenReady().then(async () => {
     try {
         createMainWindow();
 
-        await client.connect();
-        const db = client.db("AIProject");
+        // Подключаемся к MongoDB через Mongoose
+        await connectDB();
 
         const mainMenu = Menu.buildFromTemplate(menu);
         Menu.setApplicationMenu(mainMenu);
