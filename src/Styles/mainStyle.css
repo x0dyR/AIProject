@@ -11,6 +11,10 @@ h1 {
     color: #999011;
 }
 
+h1 td{
+    max-height:200px ;
+}
+
 .header-navigation ul li {
     display: inline-block;
     width: 200px;

@@ -1,30 +1,34 @@
-const axios = require('axios');
+const fetch = require('node-fetch');
 
 async function fetchBookData(query) {
     try {
-        // Формируем URL для запроса. Если у вас есть API ключ, его можно добавить через &key=ВАШ_API_KEY
-        const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`;
-        const response = await axios.get(url);
-        
-        if (response.data.totalItems > 0) {
-            // Берём первую книгу из результатов
-            const book = response.data.items[0].volumeInfo;
+        const url = `https://www.googleapis.com/books/v1/volumes?q="${encodeURIComponent(query)}"`;
+        console.log('Запрос к Google Books API:', url);
 
-            console.log(url)
-
-            return {
-                title: book.title || 'Без названия',
-                author: book.authors ? book.authors.join(', ') : 'Неизвестный автор',
-                publishYear: book.publishedDate ? book.publishedDate.substring(0, 4) : 'Неизвестен',
-                coverUrl: book.imageLinks ? book.imageLinks.thumbnail : '',
-                subjects: book.categories || [],
-                description: book.description || 'Нет описания'
-            };
-        } else {
-            throw new Error('Книги не найдены');
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP: ${response.status}`);
         }
+
+        const data = await response.json();
+        if (!data.items || data.items.length === 0) {
+            console.error("Книги не найдены для запроса:", query);
+            return null;
+        }
+
+        const book = data.items[0].volumeInfo;
+        return {
+            title: book.title ? (book.title.length > 20 ? book.title.substring(0, 30) : book.title) : "Без названия",
+            author: book.authors ? book.authors.join(', ') : "Неизвестен",
+            publishYear: book.publishedDate ? book.publishedDate.substring(0, 4) : "Неизвестен",
+            coverUrl: book.imageLinks ? book.imageLinks.thumbnail : "",
+            subjects: book.categories || [],
+            description: book.description ? (book.description.length > 200 ? book.description.substring(0, 200) + "...": book.description) : "Описание отсутствует"
+        };
+
     } catch (error) {
-        throw new Error('Ошибка при получении данных книги: ' + error.message);
+        console.error("Ошибка при выполнении запроса к Google Books API:", error);
+        return null;
     }
 }
 

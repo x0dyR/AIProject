@@ -1,91 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../src/Styles/mainStyle.css">
-    <link rel="stylesheet" href="../src/Styles/homeSytyle.css">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../src/Styles/mainStyle.css" />
+  <link rel="stylesheet" href="../src/Styles/homeSytyle.css" />
+  <title>Document</title>
 </head>
-
 <body>
-    <header>
-        <div class="header-navigation">
-            <ul>
-                <li>
-                    <a href="../src/index.html">
-                        <h1>Библиотека</h1>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://google.com">
-                        <h2>Каталог</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://terminator.aeza.net">
-                        <h2>Новости</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="./registration.html">
-                        <h1>Register</h1>
-                    </a>
-                </li>
-                <li>
-                    <a href="./login.html">
-                        <h1>Log in</h1>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </header>
-    <section>
+  <header>
+    <div class="header-navigation">
+      <ul>
+        <li>
+          <a href="../src/index.html">
+            <h1>Библиотека</h1>
+          </a>
+        </li>
+        <li>
+          <a href="https://google.com">
+            <h2>Каталог</h2>
+          </a>
+        </li>
+        <li>
+          <a href="https://terminator.aeza.net">
+            <h2>Новости</h2>
+          </a>
+        </li>
+        <li>
+          <a href="./registration.html">
+            <h1>Register</h1>
+          </a>
+        </li>
+        <li>
+          <a href="./login.html">
+            <h1>Log in</h1>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <section>
+    <div class="search">
+      <h3>Поиск</h3>
+      <input name="BookText" class="BookRequestText" type="text" required minlength="5" maxlength="200" />
+      <button type="button" class="SendRequest">Try it</button>
+    </div>
 
-        <div class="search">
-            <h3>Поиск</h3>
-            <input name="BookText" class="BookRequestText" type="text" required minlength="5" maxlength="200" />
-            <button type="button" class="SendRequest">Try it</button>
-            <script type="module" src="./Scripts/renderer.js"></script>
-        </div>
+    <div class="book-storage">
+      <!-- Проставляем идентификатор для старой таблицы -->
+      
+    </div>
 
-        <div class="book-storage">
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
-                            <a href="https://maxroll.gg/poe2/planner/bjetg0n8">
-                                <img src="../src/Art/image_image_4703266.jpg">
-                            </a>
-                            <h4>Мастер и маргарита</h4>
-                            <h5>Цена: 300$</h5>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
+    <!-- Контейнер для новой таблицы, в который будет помещён динамический контент -->
+    <div id="newTableContainer"></div>
 
-            </table>
-        </div>
-
-        <h1 class="responseText"></h1>
-    </section>
+    <script type="module" src="./Scripts/renderer.js"></script>
+  </section>
 </body>
-
 </html>

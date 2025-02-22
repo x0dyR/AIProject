@@ -1,8 +1,7 @@
 const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
 require('dotenv/config');
-const connectDB = require('./db'); // Наш модуль подключения к базе
-// Если потребуется, подключай и сервисы/модели:
+const connectDB = require('./db'); 
 const User = require('./schemas/user');
 const Book = require('./schemas/book');
 const Author = require('./schemas/author')
@@ -12,7 +11,7 @@ let mainWindow;
 
 function createMainWindow() {
     mainWindow = new BrowserWindow({
-        title: 'Seriy gey',
+        title: 'Library',
         width: 1920,
         height: 1080,
         webPreferences: {
