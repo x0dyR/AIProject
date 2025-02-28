@@ -5,20 +5,21 @@
 
 body {
     background-color: #222;
+    font-family: Arial, sans-serif;
+    color: #fff;
 }
 
 h1 {
     color: #999011;
 }
 
-h1 td{
-    max-height:200px ;
+h1 td {
+    max-height: 200px;
 }
 
 .header-navigation ul li {
     display: inline-block;
     width: 200px;
-
 }
 
 li:first-child {
@@ -33,4 +34,72 @@ li:first-child {
 .header-navigation {
     height: 100px;
     width: 100%;
+}
+
+/* Контейнер для карточек книг */
+.books-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Карточка книги с фиксированной высотой и без скроллбара */
+.book-card {
+    width: 200px;
+    height: 320px;
+    /* Фиксированная высота карточки */
+    border: 2px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 10px;
+    overflow: hidden;
+    /* Скрываем лишнее содержимое, чтобы не был скроллбар */
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+/* Заголовок книги */
+.book-card h2 {
+    font-size: 1em;
+    margin: 0 0 0.5em;
+    color: #222;
+    /* Можно изменить, чтобы контрастировал с фоном карточки */
+}
+
+.book-card {
+    width: 300px;
+    min-height: 450px;
+    background-color: #333;  /* Тёмно-серый фон */
+    color: #fff;            /* Белый текст */
+    border: 2px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 10px;
+    border-radius: 4px;
+    /* overflow: hidden;  -- убираем, если не хотим обрезать текст */
+  }
+  
+  .book-card h2, .book-card p {
+    color: #fff;            /* Текст тоже белый */
+  }
+  
+  .book-cover {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+
+/* Описание с обрезкой текста и многоточием (необязательно) */
+.book-card p.description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical; line-clamp: 5;
+    -webkit-line-clamp: 5;
+    /* Показываем не более 5 строк */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    line-height: 1.2;
 }

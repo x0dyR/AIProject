@@ -1,52 +1,15 @@
-
-
-.search {
+#popularBooksContainer {
     display: flex;
-    justify-content: right;
-}
-
-.search h3 {
-    background-color: antiquewhite;
-    margin-right: 10%;
-}
-
-table {
-    border-spacing: 30px 30px;
-}
-
-table tbody tr td {
-    display: inline-block;
-    justify-content: center;
-    align-items: center;
-    color: aliceblue;
-    width: 200px;
-    height: 200px;
-}
-
-table tbody tr td a {
-    display: flex;
-    align-items: center;
-}
-
-table tbody tr td a img {
+    flex-wrap: wrap; /* Если карточки не помещаются, они перейдут на новую строку */
+    justify-content: center; /* Центрируем карточки по горизонтали */
+    gap: 20px; /* Отступы между карточками */
+    padding: 20px;
+  }
+  
+  .book-card img {
     width: 100%;
-    height: 10em;
-}
-
-table tbody tr td h4 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-table tbody tr td h5 {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    padding-right: 20px;
-}
-
-table img{
-    width: 100px;
-    height: 150px;
-}
+    height: auto;
+    object-fit: contain; /* Показывает всю картинку, могут появиться поля */
+    max-height: 250px;   /* Можно убрать, если не хотите ограничивать высоту */
+  }
+  

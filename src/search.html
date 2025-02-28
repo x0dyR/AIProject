@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Поиск книг с ИИ</title>
+  <link rel="stylesheet" href="./Styles/mainStyle.css">
+  <link rel="stylesheet" href="./Styles/homeStyle.css">
+</head>
+<body>
+  <header>
+    <div class="header-navigation">
+      <ul>
+        <li><a href="./index.html"><h1>Библиотека</h1></a></li>
+        <li id="userMenu"></li>
+      </ul>
+    </div>
+  </header>
+  <section>
+    <h2>Подбор книг по вашим предпочтениям</h2>
+    <div class="search">
+      <input name="BookText" class="BookRequestText" type="text" placeholder="Введите запрос" required minlength="5" maxlength="200">
+      <button type="button" class="SendRequest">Получить рекомендации</button>
+    </div>
+    <div id="newTableContainer"></div>
+  </section>
+  <script src="./Scripts/index.js"></script> <!-- Для динамической шапки -->
+  <script src="./Scripts/renderer.js"></script> <!-- Функционал поиска книг -->
+</body>
+</html>

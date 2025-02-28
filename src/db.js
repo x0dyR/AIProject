@@ -1,18 +1,17 @@
+// db.js
 const mongoose = require('mongoose');
 
-const password = encodeURIComponent(process.env.MONGO_PASSWD);
-const uri = `mongodb+srv://xody:${password}@aiproject.ncjxz.mongodb.net/AIProject?retryWrites=true&w=majority`;
-
-const connectDB = async () => {
+async function connectDB() {
   try {
+    const uri = process.env.MONGO_URI; // Строка подключения в .env
     await mongoose.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
+      // Если драйвер 4.x, useNewUrlParser и useUnifiedTopology больше не нужны
     });
-    console.log('Подключение к MongoDB через Mongoose успешно!');
+    console.log('Подключение к MongoDB успешно!');
   } catch (error) {
     console.error('Ошибка подключения к MongoDB:', error);
+    throw error;
   }
-};
+}
 
 module.exports = connectDB;

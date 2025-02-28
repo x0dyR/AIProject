@@ -1,46 +1,46 @@
+<!-- login.html -->
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../src/Styles/mainStyle.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Вход в систему</title>
+  <link rel="stylesheet" href="./Styles/mainStyle.css">
 </head>
-
 <body>
-    <header>
-        <div class="header-navigation">
-            <ul>
-                <li>
-                    <a href="../src/index.html">
-                        <h1>Библиотека</h1>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://google.com">
-                        <h2>Каталог</h2>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://terminator.aeza.net">
-                        <h2>Новости</h2>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </header>
+  <header>
+    <div class="header-navigation">
+      <ul>
+        <li>
+          <a href="./index.html">
+            <h1>Библиотека</h1>
+          </a>
+        </li>
+        <li>
+          <a href="./registration.html">
+            <h2>Регистрация</h2>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
 
-    <section>
-        <div class="RegisterInputs">
-            <div>
-                <input type="text" class="mailInput">
-            </div>
-            <div>
-                <input type="text" class="passwdInput">
-            </div>
+  <section>
+    <form id="loginForm">
+      <div class="RegisterInputs">
+        <div>
+          <input type="text" id="identifier" placeholder="Введите email или логин" required>
         </div>
-    </section>
+        <div>
+          <input type="password" id="password" placeholder="Введите пароль" required>
+        </div>
+        <div>
+          <button type="submit">Войти</button>
+        </div>
+      </div>
+    </form>
+    <div id="message"></div>
+  </section>
+
+  <script src="./Scripts/login.js"></script>
 </body>
-
 </html>
