@@ -1,11 +1,14 @@
 <!-- login.html -->
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <title>Вход в систему</title>
   <link rel="stylesheet" href="./Styles/mainStyle.css">
+  <link rel="stylesheet" href="./Styles/registerStyle.css">
 </head>
+
 <body>
   <header>
     <div class="header-navigation">
@@ -24,23 +27,25 @@
     </div>
   </header>
 
-  <section>
+    <h1>Вход</h1>
     <form id="loginForm">
       <div class="RegisterInputs">
         <div>
+          <label>Логин</label>
           <input type="text" id="identifier" placeholder="Введите email или логин" required>
-        </div>
+        </div><br><br>
         <div>
+          <label>Пароль</label>
           <input type="password" id="password" placeholder="Введите пароль" required>
-        </div>
+        </div><br><br>
         <div>
           <button type="submit">Войти</button>
         </div>
       </div>
     </form>
     <div id="message"></div>
-  </section>
 
   <script src="./Scripts/login.js"></script>
 </body>
+
 </html>
