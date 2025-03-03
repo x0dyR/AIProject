@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
     const sandbox = new GlslCanvas(canvas);
 
     // Загружаем шейдер через fetch
-    fetch('shaders/background.frag')
+    fetch('shaders/background2.frag')
         .then(response => response.text())
         .then(fragmentShader => {
             sandbox.load(fragmentShader);

@@ -14,12 +14,16 @@ let mainWindow;
 
 function createMainWindow() {
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: 1920,
+    height: 1080,
     webPreferences: {
-      nodeIntegration: true, // Для упрощения, чтобы использовать require в рендерере
+      nodeIntegration: true,
       contextIsolation: false
-    }
+    },
+    titleBarStyle: "hidden",
+    fullscreen: true,
+    // transparent: true,
+    // frame: false,
   });
   // Загружаем главную страницу (например, index.html с популярными книгами)
   mainWindow.loadFile(path.join(__dirname, 'index.html'));

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <title>Главная страница - Популярные книги</title>
@@ -7,31 +8,37 @@
   <link rel="stylesheet" href="./Styles/mainStyle.css">
   <script src="../src/Scripts/GlslCanvas.js"></script>
   <style>
-    canvas  {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1; /* Самое главное - отправить канвас назад */
-    pointer-events: none; /* Чтобы клики проходили сквозь него */
-}
-
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      /* Самое главное - отправить канвас назад */
+      pointer-events: none;
+      /* Чтобы клики проходили сквозь него */
+    }
   </style>
 </head>
+
 <body>
   <canvas id="glCanvas"></canvas>
   <header>
     <div class="header-navigation">
       <ul>
-        <li><a href="./index.html"><h1>Библиотека</h1></a></li>
+        <li><a href="./index.html">
+            <h1>Библиотека</h1>
+          </a></li>
         <!-- Ссылка "Подобрать книгу" -->
-        <li><a href="./onboarding.html"><h2>Подобрать книгу</h2></a></li>
+        <li><a href="./onboarding.html">
+            <h2>Подобрать книгу</h2>
+          </a></li>
         <li id="userMenu"></li>
       </ul>
     </div>
   </header>
-  
+
   <section>
     <h2>Популярные книги</h2>
     <!-- Контейнер для отображения статических популярных книг -->
@@ -40,4 +47,5 @@
   <script src="./Scripts/index.js"></script>
   <script src="./Scripts/shaderRenderer.js"></script>
 </body>
+
 </html>
