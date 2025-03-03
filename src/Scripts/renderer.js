@@ -4,7 +4,7 @@ if (!localStorage.getItem('loggedInUser')) {
     window.location.href = "./login.html";
   } else {
     const { Ollama } = require('ollama');
-    const { fetchBookData } = require('./bookService'); // ОТНОСИТЕЛЬНЫЙ путь, так как оба файла находятся в папке Scripts
+    const { fetchBookData } = require('./Scripts/bookService'); // ОТНОСИТЕЛЬНЫЙ путь, так как оба файла находятся в папке Scripts
   
     const ollama = new Ollama();
   

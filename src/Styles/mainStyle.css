@@ -50,13 +50,13 @@ li:first-child {
     width: 200px;
     height: 320px;
     /* Фиксированная высота карточки */
-    border: 2px solid #ccc;
+    /* border: 2px solid #ccc; */
     padding: 10px;
     box-sizing: border-box;
     margin: 10px;
     overflow: hidden;
     /* Скрываем лишнее содержимое, чтобы не был скроллбар */
-    background-color: #fff;
+    background-color: #33333300;
     border-radius: 4px;
 }
 
@@ -71,9 +71,9 @@ li:first-child {
 .book-card {
     width: 300px;
     min-height: 450px;
-    background-color: #333;  /* Тёмно-серый фон */
+    background-color: #33333300;  /* Тёмно-серый фон */
     color: #fff;            /* Белый текст */
-    border: 2px solid #ccc;
+    /* border: 2px solid #ccc; */
     padding: 10px;
     box-sizing: border-box;
     margin: 10px;

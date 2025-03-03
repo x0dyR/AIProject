@@ -5,8 +5,21 @@
   <title>Онбординг - Настройка предпочтений</title>
   <link rel="stylesheet" href="./Styles/mainStyle.css">
   <link rel="stylesheet" href="./Styles/homeStyle.css">
+  <script src="../src/Scripts/GlslCanvas.js"></script>
+  <style>
+    canvas  {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Самое главное - отправить канвас назад */
+    pointer-events: none; /* Чтобы клики проходили сквозь него */
+}
+  </style>
 </head>
 <body>
+  <canvas id="glCanvas"></canvas>
   <header>
     <div class="header-navigation">
       <ul>
@@ -30,5 +43,6 @@
     </form>
   </section>
   <script src="./Scripts/onboarding.js"></script>
+  <script src="./Scripts/shaderRenderer.js"></script>
 </body>
 </html>
